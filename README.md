@@ -82,8 +82,27 @@ api.getPoliceStationsURL()
 ```
 
 You can require all available event types
+
 ```javascript
 const policeEventTypes = require('polisen-api/event_types_data')
+```
+
+Add latitude and longitude to location data
+
+```javascript
+const apiLatLong = require('polisen-api/api-lat-long')
+
+api.fetchEvents()
+  .then(events => {
+    events.map(event => apiLatLong(event.location))
+    // { latitude: 63.176683, longitude: 14.636068, ...event.location }
+  })
+
+api.fetchPoliceStations()
+  .then(stations => {
+    stations.map(station => apiLatLong(station.location))
+    // { latitude: 63.176683, longitude: 14.636068, ...station.location }
+  })
 ```
 
 ## Contributing

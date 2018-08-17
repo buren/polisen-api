@@ -1,7 +1,13 @@
 const PolisenAPI = require('./lib/client')
 
-new PolisenAPI()
-  .getEvents()
+const api = new PolisenAPI()
+
+api.getEvents()
   .then((events) => {
     console.log(events.map(e => e.name))
+  })
+
+api.getPoliceStations()
+  .then((stations) => {
+    console.log(stations.map(s => s.name))
   })

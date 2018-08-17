@@ -12,16 +12,29 @@ npm install --save polisen-api
 
 # Usage
 
-Get latest events
+Initialize
 
 ```javascript
 const PolisenAPI = require('polisen-api')
+```
 
+Get latest events
+
+```javascript
 const api = new PolisenAPI()
 
 api.getEvents()
   .then((events) => {
     console.log(events.map(e => e.name))
+  })
+```
+
+Get police stations
+
+```javascript
+api.getPoliceStations()
+  .then((stations) => {
+    console.log(stations.map(s => s.name))
   })
 ```
 

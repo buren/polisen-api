@@ -14,14 +14,16 @@ api.fetchEvents({
   date: { year: 2018 },
   locations: ['Järfälla'],
   types: ['Djur skadat/omhändertaget'],
-}).then((data) => data.map(d => {
-  return {
-    ...d,
-    location: {
-      ...d.location,
-      ...apiLatLong(d.location)
+}).then(data => {
+  return data.map(d => {
+    return {
+      ...d,
+      location: {
+        ...d.location,
+        ...apiLatLong(d.location)
+      }
     }
-  }
+  })
 }).then(printNames)
 
 api.fetchEvents({ date: { year: 2018 } }).then(printNames)

@@ -38,6 +38,8 @@ api.fetchEvents()
   })
 ```
 
+:warning: The API does __not__ let you filter further back than the last ~500 events or so. See [this note on filters](#filter-note) for more info.
+
 Filter events on location
 ```javascript
 api.fetchEvents({ locations: ['Stockholm', 'Järfälla'] })
@@ -104,6 +106,10 @@ api.fetchPoliceStations()
     // { latitude: 63.176683, longitude: 14.636068, ...station.location }
   })
 ```
+
+## Filter note
+
+When given no parameters the API returns last 500 events. The API __does not__ let you filter more than a week back (during my very limited testing), so unfortunately you can't do historical analysis.
 
 ## Contributing
 

@@ -18,24 +18,72 @@ Initialize
 const PolisenAPI = require('polisen-api')
 ```
 
+Get police stations
+
+```javascript
+api.fetchPoliceStations()
+  .then((stations) => {
+    console.log(stations.map(s => s.name))
+  })
+```
+
 Get latest events
 
 ```javascript
 const api = new PolisenAPI()
 
-api.getEvents()
+api.fetchEvents()
   .then((events) => {
     console.log(events.map(e => e.name))
   })
 ```
 
-Get police stations
+Filter events on location
+```javascript
+api.fetchEvents({ locations: ['Stockholm', 'Järfälla'] })
+```
+
+Filter events on type
 
 ```javascript
-api.getPoliceStations()
-  .then((stations) => {
-    console.log(stations.map(s => s.name))
-  })
+api.fetchEvents({ types: ['Djur skadat/omhändertaget', 'Trafikbrott'] })
+```
+
+Filter on year/month/day/hour
+```javascript
+api.fetchEvents({ date: { year: 2018 } })
+api.fetchEvents({ date: { year: 2018, month: 8 } })
+api.fetchEvents({ date: { year: 2018, month: 8, day: 16 } })
+api.fetchEvents({ date: { year: 2018, month: 8, day: 16, hour: 8 } })
+```
+
+Multiple filters
+```javascript
+api.fetchEvents({
+  date: { year: 2018 },
+  locations: ['Järfälla'],
+  types: ['Djur skadat/omhändertaget'],
+})
+```
+
+Throws errors for invalid arguments
+
+```javascript
+api.fetchEvents({ date: { year: 2018, month: '-1' } })
+//
+```
+
+If you only want to get build the URL
+```javascript
+api.getEventsURL({ locations: ['Stockholm'], date: { year: 2018, month: '3' } })
+// supports the same params as fetchEvents
+
+api.getPoliceStationsURL()
+```
+
+You can require all available event types
+```javascript
+const policeEventTypes = require('polisen-api/event_types_data')
 ```
 
 ## Contributing

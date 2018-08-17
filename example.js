@@ -10,22 +10,6 @@ api.fetchEvents()
   .then(events => events.map(e => apiLatLong(e.location)))
   .then(latLngs => console.log(latLngs))
 
-api.fetchEvents({
-  date: { year: 2018 },
-  locations: ['Järfälla'],
-  types: ['Djur skadat/omhändertaget'],
-}).then(data => {
-  return data.map(d => {
-    return {
-      ...d,
-      location: {
-        ...d.location,
-        ...apiLatLong(d.location)
-      }
-    }
-  })
-}).then(printNames)
-
 api.fetchEvents({ date: { year: 2018 } }).then(printNames)
 api.fetchEvents({ date: { year: 2018, month: 8 } }).then(printNames)
 api.fetchEvents({ date: { year: 2018, month: 8, day: 16 } }).then(printNames)
